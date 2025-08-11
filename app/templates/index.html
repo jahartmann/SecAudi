@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-xl mb-4">Server Dashboard</h1>
+<form method="post" action="/servers" class="mb-4 space-x-2">
+  <input name="name" placeholder="Servername" class="border px-2" />
+  <input name="host" placeholder="Host" class="border px-2" />
+  <button type="submit" class="bg-blue-500 text-white px-3 py-1">Hinzufügen</button>
+</form>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+{% for server in servers %}
+  <div class="border p-4">
+    <h2 class="font-bold">{{ server.name }}</h2>
+    <p>{{ server.host }}</p>
+    <form method="post" action="/servers/{{ server.id }}/audit">
+      <button class="mt-2 bg-green-600 text-white px-2 py-1">Audit erstellen</button>
+    </form>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}

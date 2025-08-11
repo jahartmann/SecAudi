@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-xl mb-2">Audit für {{ audit.server.name }}</h1>
+<p class="mb-2">Datum: {{ audit.created_at }} | Bewertung: {{ audit.rating }}</p>
+<pre class="whitespace-pre-wrap border p-4">{{ audit.report_markdown }}</pre>
+{% endblock %}

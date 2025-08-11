@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-xl mb-4">Einstellungen</h1>
+<form method="post" class="mb-4 space-x-2">
+  <input name="host" placeholder="Ollama Host" value="{{ request.app.state.ollama_host or '' }}" class="border px-2" />
+  <input name="port" placeholder="Port" value="{{ request.app.state.ollama_port or '' }}" class="border px-2" />
+  <button type="submit" class="bg-blue-500 text-white px-3 py-1">Speichern</button>
+</form>
+<select id="model-select" class="border px-2 py-1"></select>
+<script>
+async function loadModels(){
+  const res = await fetch('/settings/models');
+  const data = await res.json();
+  const select = document.getElementById('model-select');
+  select.innerHTML = '';
+  data.models.forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m;
+    opt.textContent = m;
+    select.appendChild(opt);
+  });
+}
+loadModels();
+</script>
+{% endblock %}
